@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica de evaluacion Socket</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.4/socket.io.js"></script>
+</head>
+<body>
+
+    <!-- Panel de Bienvenida -->
+    <div id="panel-bienvenida" class="welcome-container">
+        <div class="welcome-box">
+            <h2>Práctica de evaluación 1er. parcial - Ing. Alex R.G.</h2>
+            <input id="persona" type="text" placeholder="Ingresa tu nombre">
+            <button id="ingresar" onclick="ingresarAlChat()">Ingresar al chat</button>
+        </div>
+    </div>
+
+    <!-- Aplicación de Chat -->
+    <div id="app-chat" class="chat-app" style="display:none;">
+        <div class="chat-banner">Práctica de evaluación 1er. parcial - Ing. Alex R.G.</div>
+
+        <div class="chat-header">
+            <div class="header-info">
+                <div id="header-avatar" class="avatar"></div>
+                <div class="header-text">
+                    <span id="header-nombre" class="header-name"></span>
+                    <span class="header-status">En línea</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="ventana-mensajes" class="chat-window">
+            <div id="output" class="messages-container">
+                <!-- Conversación inicial -->
+                <div class="message-row them">
+                    <div class="bubble">
+                        <strong class="nombre-propio"></strong>
+                        Hola jejeje
+                        <span class="time">10:06 AM</span>
+                    </div>
+                </div>
+            </div>
+            <div id="escribiendo-mensaje" class="typing-indicator"></div>
+            <div id="estado-subida" class="typing-indicator" style="display:none;"></div>
+        </div>
+
+        <!-- Barra "respondiendo a..." -->
+        <div id="barra-respuesta" class="reply-bar" style="display:none;">
+            <div class="reply-bar-body">
+                <span id="respuesta-nombre" class="reply-bar-name"></span>
+                <span id="respuesta-texto" class="reply-bar-text"></span>
+            </div>
+            <button id="cerrar-respuesta" class="reply-bar-close" type="button" title="Cancelar respuesta" aria-label="Cancelar respuesta">
+                <i class="fas fa-xmark"></i>
+            </button>
+        </div>
+
+        <div id="area-entrada" class="chat-input-area">
+            <!-- Controles normales -->
+            <button id="adjuntar-btn" class="action-btn" type="button" title="Adjuntar archivo"><i class="fas fa-paperclip"></i></button>
+
+            <input id="mensaje" type="text" placeholder="Escribe tu mensaje..." autocomplete="off">
+
+            <button id="mic-btn" class="action-btn" type="button" title="Grabar audio"><i class="fas fa-microphone"></i></button>
+            <button id="enviar" class="send-btn" type="button" title="Enviar"><i class="fas fa-paper-plane"></i></button>
+
+            <!-- Controles mientras se graba -->
+            <div class="recording-ui">
+                <button id="cancelar-grabacion" class="cancel-btn" type="button" title="Descartar grabación"><i class="fas fa-trash"></i></button>
+                <div class="recording-status">
+                    <span class="rec-dot"></span>
+                    <span id="tiempo-grabacion">0:00</span>
+                    <span class="rec-label">Grabando…</span>
+                </div>
+                <button id="enviar-grabacion" class="send-btn" type="button" title="Enviar audio"><i class="fas fa-paper-plane"></i></button>
+            </div>
+
+            <!-- Selector de archivos (acepta cualquier tipo) -->
+            <input type="file" id="file-input" style="display: none;">
+        </div>
+
+        <input id="usuario" type="hidden">
+    </div>
+
+    <script src="/chat.js"></script>
+</body>
+</html>
